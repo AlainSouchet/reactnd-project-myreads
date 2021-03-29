@@ -4,13 +4,18 @@ import PropTypes from 'prop-types';
 import BookShelfChanger from './BookShelfChanger';
 
 class Book extends Component {
+
     static propTypes = {
         book: PropTypes.object.isRequired,
-        moveBookToShelf: PropTypes.func.isRequired,
+        onShelfChange: PropTypes.func.isRequired,
     }
 
+    /**
+     * Change shelf of the current book
+     * @param shelf
+     */
     handleShelfChange = (shelf) => {
-        this.props.moveBookToShelf(this.props.book, shelf)
+        this.props.onShelfChange(this.props.book, shelf)
     }
 
     render() {

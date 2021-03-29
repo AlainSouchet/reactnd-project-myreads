@@ -15,6 +15,9 @@ class BooksApp extends React.Component {
         this.loadBooks();
     }
 
+    /**
+     * Load all the books on the shelves
+     */
     loadBooks = () => {
         BooksAPI.getAll().then((books) => {
             this.setState(() => {
@@ -34,6 +37,11 @@ class BooksApp extends React.Component {
         return this.state.books.filter((book) => (book.shelf === shelf));
     }
 
+    /**
+     * Move the given book on the given shelf
+     * @param book
+     * @param shelf
+     */
     moveBookToShelf = (book, shelf) => {
         BooksAPI.update(book, shelf).then(() => this.loadBooks());
     }
@@ -71,8 +79,8 @@ class BooksApp extends React.Component {
                 </div>
             </div>
         )
-
     }
+
 }
 
 export default BooksApp

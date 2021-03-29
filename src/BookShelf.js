@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Book from './Book';
 
 class BookShelf extends Component {
+
     static propTypes = {
         title: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
@@ -11,7 +12,12 @@ class BookShelf extends Component {
         moveBookToShelf: PropTypes.func.isRequired,
     }
 
-    moveBookToShelf = (book, shelf) => {
+    /**
+     * Move the given book on the given shelf
+     * @param book
+     * @param shelf
+     */
+    onShelfChange = (book, shelf) => {
         this.props.moveBookToShelf(book, shelf);
     }
 
@@ -25,7 +31,7 @@ class BookShelf extends Component {
                             this.props.books.map((book) => (
                                 <li key={book.id}>
                                     <Book book={book}
-                                          moveBookToShelf={this.props.moveBookToShelf}
+                                          onShelfChange={this.onShelfChange}
                                     />
                                 </li>
                             ))
@@ -35,6 +41,7 @@ class BookShelf extends Component {
             </div>
         )
     }
+
 }
 
 export default BookShelf;
