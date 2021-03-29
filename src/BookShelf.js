@@ -8,6 +8,11 @@ class BookShelf extends Component {
         title: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
         books: PropTypes.array.isRequired,
+        moveBookToShelf: PropTypes.func.isRequired,
+    }
+
+    moveBookToShelf = (book, shelf) => {
+        this.props.moveBookToShelf(book, shelf);
     }
 
     render() {
@@ -19,7 +24,9 @@ class BookShelf extends Component {
                         {
                             this.props.books.map((book) => (
                                 <li key={book.id}>
-                                    <Book book={book} />
+                                    <Book book={book}
+                                          moveBookToShelf={this.props.moveBookToShelf}
+                                    />
                                 </li>
                             ))
                         }

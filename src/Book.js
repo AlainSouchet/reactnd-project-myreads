@@ -5,7 +5,12 @@ import BookShelfChanger from './BookShelfChanger';
 
 class Book extends Component {
     static propTypes = {
-        book: PropTypes.object,
+        book: PropTypes.object.isRequired,
+        moveBookToShelf: PropTypes.func.isRequired,
+    }
+
+    handleShelfChange = (shelf) => {
+        this.props.moveBookToShelf(this.props.book, shelf)
     }
 
     render() {
@@ -24,7 +29,9 @@ class Book extends Component {
                         }}>
                         </div>
 
-                        <BookShelfChanger />
+                        <BookShelfChanger currentShelf={book.shelf}
+                                          onShelfChange={this.handleShelfChange}
+                        />
                     </div>
                     <div className="book-title">{book.title}</div>
                     <div className="book-authors">{

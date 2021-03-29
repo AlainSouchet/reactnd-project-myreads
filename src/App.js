@@ -12,13 +12,17 @@ class BooksApp extends React.Component {
     }
 
     componentDidMount() {
+        this.loadBooks();
+    }
+
+    loadBooks = () => {
         BooksAPI.getAll().then((books) => {
             this.setState(() => {
                 return {
                     books: books
                 }
             })
-        })
+        });
     }
 
     /**
@@ -28,6 +32,10 @@ class BooksApp extends React.Component {
      */
     getBooksOnShelf = (shelf) => {
         return this.state.books.filter((book) => (book.shelf === shelf));
+    }
+
+    moveBookToShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf).then(() => this.loadBooks());
     }
 
     render() {
@@ -41,16 +49,19 @@ class BooksApp extends React.Component {
                         <BookShelf title="Read"
                                    id="read"
                                    books={this.getBooksOnShelf('read')}
+                                   moveBookToShelf={this.moveBookToShelf}
                         />
 
                         <BookShelf title="Currently Reading"
                                    id="currentlyReading"
                                    books={this.getBooksOnShelf('currentlyReading')}
+                                   moveBookToShelf={this.moveBookToShelf}
                         />
 
                         <BookShelf title="Want to read"
                                    id="wantToRead"
                                    books={this.getBooksOnShelf('wantToRead')}
+                                   moveBookToShelf={this.moveBookToShelf}
                         />
                     </div>
                 </div>
