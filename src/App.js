@@ -11,7 +11,6 @@ class BooksApp extends React.Component {
 
     state = {
         books: [],
-        showSearchPage: false,
     }
 
     componentDidMount() {
@@ -41,6 +40,18 @@ class BooksApp extends React.Component {
     }
 
     /**
+     * Get the shelf corresponding to the given book
+     * @param book
+     */
+    getShelf = (book) => {
+        const bookOnShelf = this.state.books.filter((b) => {
+            return (b.id === book.id);
+        });
+
+        return (bookOnShelf.length === 0) ? 'none' : bookOnShelf[0].shelf;
+    }
+
+    /**
      * Move the given book on the given shelf
      * @param book
      * @param shelf
@@ -53,7 +64,9 @@ class BooksApp extends React.Component {
         return (
             <div className="app">
                 <Route exact path="/search" render={() => (
-                    <BookFinder moveBookToShelf={this.moveBookToShelf} />
+                    <BookFinder moveBookToShelf={this.moveBookToShelf}
+                                getShelf={this.getShelf}
+                    />
                 )}/>
 
                 <Route exact path="/" render={() => (
@@ -87,9 +100,6 @@ class BooksApp extends React.Component {
                             <Link to="/search" className="button">
                                 Add a book
                             </Link>
-
-
-                            {/*<button onClick={() => this.setState({showSearchPage: true})}></button>*/}
                         </div>
                     </div>
                 )}/>

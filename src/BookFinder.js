@@ -8,6 +8,7 @@ import BookList from './BookList';
 class BookFinder extends Component {
     static propTypes = {
         moveBookToShelf: PropTypes.func.isRequired,
+        getShelf: PropTypes.func.isRequired,
     }
 
     state = {
@@ -43,6 +44,7 @@ class BookFinder extends Component {
 
                 <BookList books={this.state.books}
                           moveBookToShelf={this.props.moveBookToShelf}
+                          getShelf={this.props.getShelf}
                 />
             </div>
         )
