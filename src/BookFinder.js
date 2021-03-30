@@ -20,8 +20,9 @@ class BookFinder extends Component {
     findBook = (text) => {
         BooksAPI.search(text).then((books) => {
             this.setState(() => {
+                // If API call return an error or no books, books should be an empty array
                 return {
-                    books: books,
+                    books: (books === undefined || books.hasOwnProperty('error')) ? [] : books,
                 }
             })
         });

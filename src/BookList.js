@@ -8,21 +8,29 @@ class BookList extends Component {
     }
 
     render() {
+        const books = this.props.books;
+
         return (
             <div className="search-books-results">
-                <ol className="books-grid">
-                    {
-                        this.props.books.map((book) => {
-                            return (
-                                <li>
-                                    <Book book={book}
-                                          onShelfChange={this.props.moveBookToShelf}
-                                    />
-                                </li>
-                            )
-                        })
-                    }
-                </ol>
+                {(books.length === 0) ? (
+                    <div className="no-book-found">
+                        No book found
+                    </div>
+                ) : (
+                    <ol className="books-grid">
+                        {
+                            books.map((book) => {
+                                return (
+                                    <li key={book.id}>
+                                        <Book book={book}
+                                              onShelfChange={this.props.moveBookToShelf}
+                                        />
+                                    </li>
+                                )
+                            })
+                        }
+                    </ol>
+                )}
             </div>
         )
     }
