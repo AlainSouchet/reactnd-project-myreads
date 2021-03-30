@@ -1,7 +1,8 @@
-import React from 'react'
-// import * as BooksAPI from './BooksAPI'
-import './App.css'
+import React from 'react';
+import {Link, Route} from "react-router-dom";
+import './App.css';
 import * as BooksAPI from './BooksAPI';
+
 
 import BookShelf from './BookShelf';
 import BookFinder from './BookFinder';
@@ -39,12 +40,6 @@ class BooksApp extends React.Component {
         return this.state.books.filter((book) => (book.shelf === shelf));
     }
 
-    backToShelves = () => {
-        this.setState({
-            showSearchPage: false,
-        })
-    }
-
     /**
      * Move the given book on the given shelf
      * @param book
@@ -57,11 +52,11 @@ class BooksApp extends React.Component {
     render() {
         return (
             <div className="app">
-                {this.state.showSearchPage ? (
-                    <BookFinder moveBookToShelf={this.moveBookToShelf}
-                                backToShelves={this.backToShelves}
-                    />
-                ) : (
+                <Route exact path="/search" render={() => (
+                    <BookFinder moveBookToShelf={this.moveBookToShelf} />
+                )}/>
+
+                <Route exact path="/" render={() => (
                     <div className="list-books">
                         <div className="list-books-title">
                             <h1>MyReads</h1>
@@ -89,10 +84,15 @@ class BooksApp extends React.Component {
                         </div>
 
                         <div className="open-search">
-                            <button onClick={() => this.setState({showSearchPage: true})}>Add a book</button>
+                            <Link to="/search" className="button">
+                                Add a book
+                            </Link>
+
+
+                            {/*<button onClick={() => this.setState({showSearchPage: true})}></button>*/}
                         </div>
                     </div>
-                )}
+                )}/>
             </div>
         )
 
