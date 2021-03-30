@@ -4,11 +4,13 @@ import './App.css'
 import * as BooksAPI from './BooksAPI';
 
 import BookShelf from './BookShelf';
+import BookFinder from './BookFinder';
 
 class BooksApp extends React.Component {
 
     state = {
         books: [],
+        showSearchPage: false,
     }
 
     componentDidMount() {
@@ -37,6 +39,12 @@ class BooksApp extends React.Component {
         return this.state.books.filter((book) => (book.shelf === shelf));
     }
 
+    backToShelves = () => {
+        this.setState({
+            showSearchPage: false,
+        })
+    }
+
     /**
      * Move the given book on the given shelf
      * @param book
@@ -48,39 +56,48 @@ class BooksApp extends React.Component {
 
     render() {
         return (
-            <div className="list-books">
-                <div className="list-books-title">
-                    <h1>MyReads</h1>
-                </div>
-                <div className="list-books-content">
-                    <div>
-                        <BookShelf title="Read"
-                                   id="read"
-                                   books={this.getBooksOnShelf('read')}
-                                   moveBookToShelf={this.moveBookToShelf}
-                        />
+            <div className="app">
+                {this.state.showSearchPage ? (
+                    <BookFinder moveBookToShelf={this.moveBookToShelf}
+                                backToShelves={this.backToShelves}
+                    />
+                ) : (
+                    <div className="list-books">
+                        <div className="list-books-title">
+                            <h1>MyReads</h1>
+                        </div>
+                        <div className="list-books-content">
+                            <div>
+                                <BookShelf title="Read"
+                                           id="read"
+                                           books={this.getBooksOnShelf('read')}
+                                           moveBookToShelf={this.moveBookToShelf}
+                                />
 
-                        <BookShelf title="Currently Reading"
-                                   id="currentlyReading"
-                                   books={this.getBooksOnShelf('currentlyReading')}
-                                   moveBookToShelf={this.moveBookToShelf}
-                        />
+                                <BookShelf title="Currently Reading"
+                                           id="currentlyReading"
+                                           books={this.getBooksOnShelf('currentlyReading')}
+                                           moveBookToShelf={this.moveBookToShelf}
+                                />
 
-                        <BookShelf title="Want to read"
-                                   id="wantToRead"
-                                   books={this.getBooksOnShelf('wantToRead')}
-                                   moveBookToShelf={this.moveBookToShelf}
-                        />
+                                <BookShelf title="Want to read"
+                                           id="wantToRead"
+                                           books={this.getBooksOnShelf('wantToRead')}
+                                           moveBookToShelf={this.moveBookToShelf}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="open-search">
+                            <button onClick={() => this.setState({showSearchPage: true})}>Add a book</button>
+                        </div>
                     </div>
-                </div>
-
-                <div className="open-search">
-                    <button onClick={() => this.setState({showSearchPage: true})}>Add a book</button>
-                </div>
+                )}
             </div>
         )
+
     }
 
 }
 
-export default BooksApp
+export default BooksApp;

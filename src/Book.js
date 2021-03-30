@@ -18,9 +18,21 @@ class Book extends Component {
         this.props.onShelfChange(this.props.book, shelf)
     }
 
+    /* TEST */
+    getMeta = () => {
+        const url = this.props.book.imageLinks.thumbnail;
+        let img = new Image();
+        img.addEventListener("load", function(){
+            console.log(this.naturalWidth +' '+ this.naturalHeight);
+            return this.naturalWidth +' '+ this.naturalHeight;
+        });
+        img.src = url;
+    }
+    /* END TEST */
+
+
     render() {
         const book = this.props.book;
-
         return (
             <div>
                 <div className="book">
@@ -39,9 +51,12 @@ class Book extends Component {
                         />
                     </div>
                     <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{
-                        book.authors.join(' - ')
-                    }</div>
+
+                    {book.authors !== undefined && (
+                        <div className="book-authors">{
+                            book.authors.join(' - ')
+                        }</div>
+                    )}
                 </div>
             </div>
         )
