@@ -23,11 +23,23 @@ class Book extends Component {
     }
 
     /**
+     * Checks if the given book has a thumbnail
+     * @param book
+     * @returns {boolean}
+     */
+    hasBookThumbnail = (book) => {
+        return book.imageLinks !== undefined &&
+            book.imageLinks.thumbnail !== undefined;
+    }
+
+    /**
      * Render Book component
      * @returns {JSX.Element}
      */
     render() {
         const book = this.props.book;
+        const background = this.hasBookThumbnail(book) ? `url(${book.imageLinks.thumbnail})` : `#eee`
+
         return (
             <div>
                 <div className="book">
@@ -35,7 +47,7 @@ class Book extends Component {
                         <div className="book-cover" style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: `url(${book.imageLinks.thumbnail})`
+                            background: `${background}`,
                         }}>
                         </div>
 
