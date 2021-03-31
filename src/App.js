@@ -9,10 +9,17 @@ import BookFinder from './BookFinder';
 
 class BooksApp extends React.Component {
 
+    /**
+     * Component's states
+     * @type {{books: []}}
+     */
     state = {
         books: [],
     }
 
+    /**
+     * Actions to do when the component is loaded
+     */
     componentDidMount() {
         this.loadBooks();
     }
@@ -60,6 +67,10 @@ class BooksApp extends React.Component {
         BooksAPI.update(book, shelf).then(() => this.loadBooks());
     }
 
+    /**
+     * Render App component
+     * @returns {JSX.Element}
+     */
     render() {
         return (
             <div className="app">
@@ -105,7 +116,6 @@ class BooksApp extends React.Component {
                 )}/>
             </div>
         )
-
     }
 
 }

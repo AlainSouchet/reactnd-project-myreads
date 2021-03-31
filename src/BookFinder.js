@@ -6,19 +6,36 @@ import * as BooksAPI from './BooksAPI';
 import BookList from './BookList';
 
 class BookFinder extends Component {
+
+    /**
+     * Component's prop types
+     * @type {{}}
+     */
     static propTypes = {
         moveBookToShelf: PropTypes.func.isRequired,
         getShelf: PropTypes.func.isRequired,
     }
 
+    /**
+     * Component's states
+     * @type {{books: []}}
+     */
     state = {
         books: [],
     }
 
+    /**
+     * Handle change of the input field
+     * @param event
+     */
     handleInputChange = (event) => {
         this.findBook(event.target.value);
     }
 
+    /**
+     * Use the book API to find books corresponding to the given string
+     * @param text
+     */
     findBook = (text) => {
         BooksAPI.search(text).then((books) => {
             this.setState(() => {
@@ -30,6 +47,10 @@ class BookFinder extends Component {
         });
     }
 
+    /**
+     * Render BookFinder component
+     * @returns {JSX.Element}
+     */
     render() {
         return (
             <div className="search-books">

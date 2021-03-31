@@ -1,11 +1,28 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class BookShelfChanger extends Component {
 
+    /**
+     * Component's prop types
+     * @type {{}}
+     */
+    static propTypes = {
+        currentShelf: PropTypes.func.isRequired,
+    }
+
+    /**
+     * Handle change of select menu
+     * @param event
+     */
     handleSelectChange = (event) => {
         this.props.onShelfChange(event.target.value);
     }
 
+    /**
+     * Render BookShelfChanger component
+     * @returns {JSX.Element}
+     */
     render() {
         return (
             <div className="book-shelf-changer">
@@ -19,6 +36,7 @@ class BookShelfChanger extends Component {
             </div>
         )
     }
+
 }
 
 export default BookShelfChanger;

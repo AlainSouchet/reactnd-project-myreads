@@ -5,6 +5,10 @@ import Book from './Book';
 
 class BookShelf extends Component {
 
+    /**
+     * Component's prop types
+     * @type {{}}
+     */
     static propTypes = {
         title: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
@@ -21,6 +25,10 @@ class BookShelf extends Component {
         this.props.moveBookToShelf(book, shelf);
     }
 
+    /**
+     * Render BookShelf component
+     * @returns {JSX.Element}
+     */
     render() {
         return (
             <div className="bookshelf">

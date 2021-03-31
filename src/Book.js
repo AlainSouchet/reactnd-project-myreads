@@ -5,6 +5,10 @@ import BookShelfChanger from './BookShelfChanger';
 
 class Book extends Component {
 
+    /**
+     * Component's prop types
+     * @type {{}}
+     */
     static propTypes = {
         book: PropTypes.object.isRequired,
         onShelfChange: PropTypes.func.isRequired,
@@ -18,19 +22,10 @@ class Book extends Component {
         this.props.onShelfChange(this.props.book, shelf)
     }
 
-    /* TEST */
-    getMeta = () => {
-        const url = this.props.book.imageLinks.thumbnail;
-        let img = new Image();
-        img.addEventListener("load", function(){
-            console.log(this.naturalWidth +' '+ this.naturalHeight);
-            return this.naturalWidth +' '+ this.naturalHeight;
-        });
-        img.src = url;
-    }
-    /* END TEST */
-
-
+    /**
+     * Render Book component
+     * @returns {JSX.Element}
+     */
     render() {
         const book = this.props.book;
         return (
