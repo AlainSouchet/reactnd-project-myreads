@@ -8,7 +8,7 @@ class BookShelfChanger extends Component {
      * @type {{}}
      */
     static propTypes = {
-        currentShelf: PropTypes.func.isRequired,
+        currentShelf: PropTypes.string.isRequired,
     }
 
     /**
